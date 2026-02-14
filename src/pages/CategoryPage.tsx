@@ -4,25 +4,32 @@ import { ArrowLeft } from 'lucide-react';
 import BookCard from '@/components/BookCard';
 import BottomNav from '@/components/BottomNav';
 
-const categoriesData: Record<string, { title: string; emoji: string; books: { id: string; title: string; author: string; emoji: string }[] }> = {
+const categoriesData: Record<string, { title: string; books: { id: string; title: string; author: string; emoji: string }[] }> = {
   bible: {
     title: 'Escrituras Sagradas',
-    emoji: '📖',
     books: [{ id: 'bible', title: 'Bíblia Sagrada ACF', author: 'Almeida Corrigida Fiel', emoji: '✝️' }],
   },
   classics: {
-    title: 'Clássicos Brasileiros',
-    emoji: '🖋️',
+    title: 'Literatura Brasileira',
     books: [
       { id: 'gutenberg-55752', title: 'Dom Casmurro', author: 'Machado de Assis', emoji: '📖' },
       { id: 'gutenberg-54829', title: 'Memórias Póstumas de Brás Cubas', author: 'Machado de Assis', emoji: '📜' },
     ],
   },
   philosophy: {
-    title: 'Filosofia Clássica',
-    emoji: '🏛️',
+    title: 'Filosofia & Estratégia',
     books: [
       { id: 'gutenberg-1497', title: 'A República', author: 'Platão', emoji: '🏛️' },
+      { id: 'local-0', title: 'Meditações', author: 'Marco Aurélio', emoji: '🧘' },
+      { id: 'local-1', title: 'A Arte da Guerra', author: 'Sun Tzu', emoji: '⚔️' },
+      { id: 'local-2', title: 'O Príncipe', author: 'Nicolau Maquiavel', emoji: '👑' },
+    ],
+  },
+  universal: {
+    title: 'Literatura Universal',
+    books: [
+      { id: 'local-3', title: 'Divina Comédia', author: 'Dante Alighieri', emoji: '🔥' },
+      { id: 'local-4', title: 'Orgulho e Preconceito', author: 'Jane Austen', emoji: '💎' },
     ],
   },
 };
@@ -48,7 +55,7 @@ const CategoryPage = () => {
             <ArrowLeft className="h-5 w-5" />
           </button>
           <h1 className="font-display text-lg font-bold text-foreground">
-            {category.emoji} {category.title}
+            {category.title}
           </h1>
         </div>
       </header>

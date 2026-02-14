@@ -6,7 +6,6 @@ import ThemeSelector from '@/components/ThemeSelector';
 import { fetchBookContent } from '@/lib/gutendex';
 import { setLastRead } from '@/lib/reading-progress';
 
-// Simple Bible ACF data (Genesis 1 as sample)
 const BIBLE_CONTENT = `📖 Bíblia Sagrada — Almeida Corrigida Fiel
 
 ━━━━━━━━━━━━━━━━━━━━
@@ -82,6 +81,14 @@ const Reader = () => {
         const text = await fetchBookContent(id);
         setContent(text);
         setLastRead(bookId, info.title, 1);
+      } else if (bookId?.startsWith('local-')) {
+        const id = parseInt(bookId.replace('local-', ''), 10);
+        const { getBookInfo } = await import('@/lib/gutendex');
+        const info = getBookInfo(id);
+        setTitle(info.title);
+        const text = await fetchBookContent(id);
+        setContent(text);
+        setLastRead(bookId, info.title, 1);
       }
       setLoading(false);
     };
@@ -103,14 +110,14 @@ const Reader = () => {
       <main className="px-4 py-8 md:py-12">
         {loading ? (
           <div className="flex items-center justify-center py-20">
-            <Loader2 className="h-8 w-8 animate-spin text-accent" />
+            <Loader2 className="h-8 w-8 animate-spin text-accent/50" />
           </div>
         ) : (
           <motion.article
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="reader-text"
+            className="reader-text reader-landscape"
           >
             <div className="whitespace-pre-wrap text-foreground text-base md:text-lg leading-[1.8] tracking-[0.3px]">
               {content}
@@ -120,8 +127,8 @@ const Reader = () => {
       </main>
 
       <footer className="text-center py-6 border-t border-border">
-        <p className="font-serif text-xs text-muted-foreground tracking-widest">
-          Bibliocode • Arquitetado por Thiklayus
+        <p className="font-serif text-[10px] text-muted-foreground/50 tracking-[0.2em] uppercase">
+          Bibliocode • Desenvolvido por Thiklayus • Engenharia Humanística para o Conhecimento
         </p>
       </footer>
     </div>
