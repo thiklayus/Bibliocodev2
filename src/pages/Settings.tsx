@@ -1,12 +1,14 @@
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Mail, Volume2, VolumeX } from 'lucide-react';
+import { ArrowLeft, Mail, Volume2, VolumeX, LogIn, LogOut, Shield } from 'lucide-react';
 import ThemeSelector from '@/components/ThemeSelector';
 import BottomNav from '@/components/BottomNav';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useAuth } from '@/hooks/useAuth';
 
 const Settings = () => {
   const navigate = useNavigate();
   const { soundEnabled, setSoundEnabled } = useTheme();
+  const { user, isAdmin, signOut } = useAuth();
 
   return (
     <div className="min-h-screen pb-20">
@@ -57,6 +59,36 @@ const Settings = () => {
             <Mail className="h-4 w-4 text-accent/70" />
             thiklayus.bibliocode@gmail.com
           </a>
+        </section>
+
+        <section>
+          <h2 className="font-display text-base font-bold text-foreground mb-4">Conta</h2>
+          {user ? (
+            <div className="space-y-3">
+              <p className="font-serif text-sm text-muted-foreground">{user.email}</p>
+              {isAdmin && (
+                <button
+                  onClick={() => navigate('/admin')}
+                  className="flex items-center gap-3 rounded-lg border border-accent/30 bg-accent/5 px-4 py-3 text-sm font-serif text-accent transition-colors hover:bg-accent/10 w-full"
+                >
+                  <Shield className="h-4 w-4" /> Painel Administrativo
+                </button>
+              )}
+              <button
+                onClick={signOut}
+                className="flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-3 text-sm font-serif text-foreground transition-colors hover:bg-muted w-full"
+              >
+                <LogOut className="h-4 w-4 text-muted-foreground" /> Sair da conta
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => navigate('/auth')}
+              className="flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-3 text-sm font-serif text-foreground transition-colors hover:bg-muted w-full"
+            >
+              <LogIn className="h-4 w-4 text-accent" /> Entrar ou criar conta
+            </button>
+          )}
         </section>
 
         <section>
