@@ -18,7 +18,6 @@ const SuggestBook = () => {
     if (!title.trim() || !author.trim()) return;
 
     const email = "thiklayus.bibliocode@gmail.com";
-
     const subject = "Sugestão de Livro - Bibliocode";
 
     const body = `Título: ${title.trim()}
@@ -27,15 +26,10 @@ Autor: ${author.trim()}
 Motivo:
 ${reason.trim()}`;
 
-    const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-    // Tenta abrir Gmail Web
-    window.open(gmailURL, "_blank");
-
-    // Fallback para mailto caso bloqueie
-    setTimeout(() => {
-      window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    }, 500);
+    // Abre diretamente o app de e-mail padrão
+    window.location.href = mailtoLink;
 
     setSuccess(true);
   };
@@ -50,11 +44,10 @@ ${reason.trim()}`;
         >
           <div className="text-4xl mb-4">📬</div>
           <h2 className="font-display text-xl font-bold text-foreground mb-2">
-            Redirecionando para o e-mail...
+            Abrindo seu aplicativo de e-mail...
           </h2>
           <p className="font-serif text-sm text-muted-foreground mb-6">
-            Abrimos o Gmail com sua sugestão preenchida.
-            Caso não abra automaticamente, verifique se seu navegador bloqueou pop-ups.
+            Caso não abra automaticamente, verifique se você possui um app de e-mail configurado no dispositivo.
           </p>
           <button
             onClick={() => navigate('/dashboard')}
@@ -153,4 +146,3 @@ ${reason.trim()}`;
 };
 
 export default SuggestBook;
-          
