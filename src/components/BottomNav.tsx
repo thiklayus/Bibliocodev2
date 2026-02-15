@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Home, BookOpen, Settings, Mail } from 'lucide-react';
+import { Home, BookOpen, Settings, Lightbulb } from 'lucide-react';
 
 const BottomNav = () => {
   const navigate = useNavigate();
@@ -8,6 +8,7 @@ const BottomNav = () => {
   const items = [
     { icon: Home, label: 'Início', path: '/dashboard' },
     { icon: BookOpen, label: 'Leitura', path: '/' },
+    { icon: Lightbulb, label: 'Sugerir', path: '/suggest' },
     { icon: Settings, label: 'Ajustes', path: '/settings' },
   ];
 
@@ -20,7 +21,7 @@ const BottomNav = () => {
             <button
               key={item.label}
               onClick={() => navigate(item.path)}
-              className={`flex flex-col items-center gap-1 px-4 py-1 transition-colors duration-300 ${
+              className={`flex flex-col items-center gap-1 px-3 py-1 transition-colors duration-300 ${
                 active ? 'text-accent' : 'text-muted-foreground/60 hover:text-muted-foreground'
               }`}
             >
