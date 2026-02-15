@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AuthProvider } from "@/hooks/useAuth";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { Analytics } from "@vercel/analytics/react";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import CategoryPage from "./pages/CategoryPage";
@@ -39,6 +40,7 @@ const App = () => (
             </Routes>
           </BrowserRouter>
           <SpeedInsights />
+          <Analytics />
         </TooltipProvider>
       </AuthProvider>
     </ThemeProvider>
