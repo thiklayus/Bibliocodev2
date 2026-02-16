@@ -1,35 +1,57 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Home, BookOpen, Settings, Lightbulb } from 'lucide-react';
+import { Home, BookOpen, Lightbulb, Settings } from 'lucide-react';
 
 const BottomNav = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const items = [
-    { icon: Home, label: 'Início', path: '/dashboard' },
-    { icon: BookOpen, label: 'Leitura', path: '/' },
-    { icon: Lightbulb, label: 'Sugerir', path: '/suggest' },
-    { icon: Settings, label: 'Ajustes', path: '/settings' },
-  ];
+  const isActive = (path: string) =>
+    location.pathname.startsWith(path);
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 glass-nav border-t border-border">
-      <div className="flex items-center justify-around py-3 max-w-lg mx-auto">
-        {items.map((item) => {
-          const active = location.pathname === item.path;
-          return (
-            <button
-              key={item.label}
-              onClick={() => navigate(item.path)}
-              className={`flex flex-col items-center gap-1 px-3 py-1 transition-colors duration-300 ${
-                active ? 'text-accent' : 'text-muted-foreground/60 hover:text-muted-foreground'
-              }`}
-            >
-              <item.icon className="h-5 w-5" />
-              <span className="text-[10px] font-serif tracking-wide">{item.label}</span>
-            </button>
-          );
-        })}
+    <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-background/95 backdrop-blur">
+      <div className="max-w-4xl mx-auto flex justify-around py-3">
+
+        <button
+          onClick={() => navigate('/dashboard')}
+          className={`flex flex-col items-center text-xs ${
+            isActive('/dashboard') ? 'text-accent' : 'text-muted-foreground'
+          }`}
+        >
+          <Home className="h-5 w-5 mb-1" />
+          Início
+        </button>
+
+        <button
+          onClick={() => navigate('/reader/bible')}
+          className={`flex flex-col items-center text-xs ${
+            isActive('/reader') ? 'text-accent' : 'text-muted-foreground'
+          }`}
+        >
+          <BookOpen className="h-5 w-5 mb-1" />
+          Leitura
+        </button>
+
+        <button
+          onClick={() => navigate('/suggest')}
+          className={`flex flex-col items-center text-xs ${
+            isActive('/suggest') ? 'text-accent' : 'text-muted-foreground'
+          }`}
+        >
+          <Lightbulb className="h-5 w-5 mb-1" />
+          Sugerir
+        </button>
+
+        <button
+          onClick={() => navigate('/settings')}
+          className={`flex flex-col items-center text-xs ${
+            isActive('/settings') ? 'text-accent' : 'text-muted-foreground'
+          }`}
+        >
+          <Settings className="h-5 w-5 mb-1" />
+          Ajustes
+        </button>
+
       </div>
     </nav>
   );
