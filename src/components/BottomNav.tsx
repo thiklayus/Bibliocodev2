@@ -13,9 +13,9 @@ const BottomNav = () => {
       <div className="max-w-4xl mx-auto flex justify-around py-3">
 
         <button
-          onClick={() => navigate('/dashboard')}
+          onClick={() => navigate('/')}
           className={`flex flex-col items-center text-xs ${
-            isActive('/dashboard') ? 'text-accent' : 'text-muted-foreground'
+            isActive('/') ? 'text-accent' : 'text-muted-foreground'
           }`}
         >
           <Home className="h-5 w-5 mb-1" />
