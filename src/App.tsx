@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-import Index from '@/pages/Index';
 import Dashboard from '@/pages/Dashboard';
 import BiblePage from '@/pages/BiblePage';
 import CategoryPage from '@/pages/CategoryPage';
@@ -13,19 +12,16 @@ const App = () => {
     <BrowserRouter>
       <Routes>
 
-        {/* Entrada oficial */}
-        <Route path="/" element={<Index />} />
+        {/* Home oficial */}
+        <Route path="/" element={<Dashboard />} />
 
-        {/* Home real */}
-        <Route path="/dashboard" element={<Dashboard />} />
-
-        {/* Bíblia isolada */}
+        {/* Bíblia */}
         <Route path="/bible" element={<BiblePage />} />
 
         {/* Categorias */}
         <Route path="/category/:categoryId" element={<CategoryPage />} />
 
-        {/* Leitura de livros (não Bíblia) */}
+        {/* Leitura livros */}
         <Route path="/reader/:bookId" element={<Reader />} />
 
         {/* Extras */}
@@ -33,7 +29,7 @@ const App = () => {
         <Route path="/settings" element={<Settings />} />
 
         {/* Fallback */}
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
 
       </Routes>
     </BrowserRouter>
