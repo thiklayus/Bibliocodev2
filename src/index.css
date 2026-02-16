@@ -158,6 +158,34 @@
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     background: hsl(var(--background) / 0.85);
   }
+  .bookPage {
+  background: #fffdf8;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  min-height: 60vh;
+}
+
+.verseNum {
+  font-size: 11px;
+  vertical-align: super;
+  margin-right: 6px;
+  color: gray;
+}
+
+.verseRow {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+@media (orientation: landscape) {
+  .bookPage {
+    column-count: 2;
+    column-gap: 40px;
+  }
+}
+  
 }
 
 @layer utilities {
