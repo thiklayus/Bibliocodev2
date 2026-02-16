@@ -70,7 +70,7 @@ const Dashboard = () => {
         {lastRead && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
             <button
-              onClick={() => navigate(`/reader/${lastRead.bookId}`)}
+              navigate('/bible')
               className="w-full flex items-center gap-4 rounded-lg border border-accent/20 bg-accent/5 p-4 text-left hover:bg-accent/10 transition-colors"
             >
               <BookMarked className="h-6 w-6 text-accent/70 flex-shrink-0" />
