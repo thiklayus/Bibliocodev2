@@ -1,75 +1,64 @@
 import { useState } from "react";
-import { bibleBooks } from "@/data/bibleBooks";
+import { useNavigate } from "react-router-dom";
+import BottomNav from "@/components/BottomNav";
 import BibleReader from "@/components/BibleReader";
 
+const BOOKS = [
+  { name: "João", api: "john", chapters: 21 },
+  { name: "Salmos", api: "psalms", chapters: 150 },
+  { name: "Gênesis", api: "genesis", chapters: 50 },
+];
+
 export default function BiblePage() {
-  const [selectedBook, setSelectedBook] = useState<any>(null);
-  const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
+  const navigate = useNavigate();
+  const [book, setBook] = useState(BOOKS[0]);
+  const [chapter, setChapter] = useState(1);
 
-  if (selectedBook && selectedChapter) {
-    return (
-      <div>
-        <button
-          onClick={() => setSelectedChapter(null)}
-          className="p-4 text-sm text-accent"
-        >
-          ← Voltar aos capítulos
-        </button>
+  return (
+    <div className="min-h-screen pb-24">
 
-        <BibleReader
-          book={selectedBook.apiName}
-          chapter={selectedChapter}
-        />
-      </div>
-    );
-  }
-
-  if (selectedBook) {
-    return (
-      <div className="p-4">
-        <button
-          onClick={() => setSelectedBook(null)}
-          className="mb-4 text-sm text-accent"
-        >
-          ← Voltar aos livros
-        </button>
-
-        <h2 className="text-lg font-bold mb-4">
-          {selectedBook.name}
-        </h2>
+      <header className="sticky top-0 bg-background border-b p-4 z-40">
+        <div className="flex justify-between mb-3">
+          <button onClick={() => navigate(-1)}>← Voltar</button>
+          <select
+            value={book.api}
+            onChange={(e) => {
+              const selected = BOOKS.find(b => b.api === e.target.value)!;
+              setBook(selected);
+              setChapter(1);
+            }}
+          >
+            {BOOKS.map(b => (
+              <option key={b.api} value={b.api}>
+                {b.name}
+              </option>
+            ))}
+          </select>
+          <button onClick={() => navigate("/")}>Início</button>
+        </div>
 
         <div className="flex flex-wrap gap-2">
-          {Array.from({ length: selectedBook.chapters }, (_, i) => (
+          {Array.from({ length: book.chapters }, (_, i) => i + 1).map(n => (
             <button
-              key={i}
-              onClick={() => setSelectedChapter(i + 1)}
-              className="px-3 py-2 rounded bg-card border border-border text-sm"
+              key={n}
+              onClick={() => setChapter(n)}
+              className={`text-xs px-2 py-1 border rounded ${
+                chapter === n ? "bg-accent text-white" : ""
+              }`}
             >
-              {i + 1}
+              {n}
             </button>
           ))}
         </div>
-      </div>
-    );
-  }
+      </header>
 
-  return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-6">
-        Bíblia Sagrada
-      </h1>
+      <BibleReader
+        book={book.api}
+        chapter={chapter}
+        bookLabel={book.name}
+      />
 
-      <div className="grid grid-cols-2 gap-4">
-        {bibleBooks.map((book) => (
-          <button
-            key={book.name}
-            onClick={() => setSelectedBook(book)}
-            className="p-4 rounded bg-card border border-border text-sm"
-          >
-            {book.name}
-          </button>
-        ))}
-      </div>
+      <BottomNav />
     </div>
   );
 }
