@@ -13,7 +13,14 @@ const Dashboard = () => {
   const categories = [
     {
       title: 'Escrituras Sagradas',
-      books: [{ id: 'bible', title: 'Bíblia Sagrada ACF', author: 'Almeida Corrigida Fiel', emoji: '✝️' }],
+      books: [
+        {
+          id: 'bible',
+          title: 'Bíblia Sagrada ACF',
+          author: 'Almeida Corrigida Fiel',
+          emoji: '✝️'
+        }
+      ],
     },
     {
       title: 'Literatura Brasileira',
@@ -44,10 +51,17 @@ const Dashboard = () => {
     <div className="min-h-screen pb-20">
       <header className="sticky top-0 z-30 glass-nav border-b border-border">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <button onClick={() => navigate('/')} className="text-muted-foreground hover:text-foreground transition-colors">
+          <button
+            onClick={() => navigate('/')}
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
             <ArrowLeft className="h-5 w-5" />
           </button>
-          <h1 className="font-display text-lg font-bold text-foreground">Bibliocode</h1>
+
+          <h1 className="font-display text-lg font-bold text-foreground">
+            Bibliocode
+          </h1>
+
           <ThemeSelector />
         </div>
       </header>
@@ -61,8 +75,12 @@ const Dashboard = () => {
             >
               <BookMarked className="h-6 w-6 text-accent/70 flex-shrink-0" />
               <div>
-                <p className="font-serif text-sm text-accent font-semibold">Continuar Lendo</p>
-                <p className="font-serif text-xs text-muted-foreground">{lastRead.title}</p>
+                <p className="font-serif text-sm text-accent font-semibold">
+                  Continuar Lendo
+                </p>
+                <p className="font-serif text-xs text-muted-foreground">
+                  {lastRead.title}
+                </p>
               </div>
             </button>
           </motion.div>
@@ -81,7 +99,10 @@ const Dashboard = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: ci * 0.08 }}
           >
-            <h2 className="font-display text-lg font-bold text-foreground mb-4 tracking-tight">{cat.title}</h2>
+            <h2 className="font-display text-lg font-bold text-foreground mb-4 tracking-tight">
+              {cat.title}
+            </h2>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {cat.books.map((book) => (
                 <BookCard
@@ -89,7 +110,11 @@ const Dashboard = () => {
                   title={book.title}
                   author={book.author}
                   emoji={book.emoji}
-                  onClick={() => navigate(`/reader/${book.id}`)}
+                  onClick={() =>
+                    book.id === "bible"
+                      ? navigate("/bible")
+                      : navigate(`/reader/${book.id}`)
+                  }
                 />
               ))}
             </div>
