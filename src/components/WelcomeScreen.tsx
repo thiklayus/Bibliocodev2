@@ -11,28 +11,28 @@ const WelcomeScreen = () => {
       subtitle: 'Escrituras Sagradas',
       description: 'A Bíblia Sagrada na versão Almeida Corrigida Fiel.',
       icon: BookOpen,
-      path: '/bible', // 🔥 CORRIGIDO AQUI
+      path: '/bible',
     },
     {
       title: 'Brasil',
       subtitle: 'Literatura Brasileira',
       description: 'Machado de Assis e as grandes obras nacionais.',
       icon: Landmark,
-      path: '/dashboard',
+      path: '/category/brasil',
     },
     {
       title: 'Sabedoria',
       subtitle: 'Filosofia & Estratégia',
       description: 'Platão, Marco Aurélio, Sun Tzu e Maquiavel.',
       icon: Library,
-      path: '/dashboard',
+      path: '/category/sabedoria',
     },
     {
       title: 'Universal',
       subtitle: 'Clássicos Universais',
       description: 'Dante, Jane Austen e obras fundamentais.',
       icon: Globe,
-      path: '/dashboard',
+      path: '/category/universal',
     },
   ];
 
