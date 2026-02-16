@@ -26,6 +26,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
+            <Route path="/bible" element={<BiblePage />} />
             <Route path="/" element={<Index />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/category/:categoryId" element={<CategoryPage />} />
