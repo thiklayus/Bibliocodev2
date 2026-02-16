@@ -18,14 +18,14 @@ const WelcomeScreen = () => {
       subtitle: 'Literatura Brasileira',
       description: 'Machado de Assis e as grandes obras nacionais.',
       icon: Landmark,
-      path: '/category/brasil',
+      path: '/category/classics',
     },
     {
       title: 'Sabedoria',
       subtitle: 'Filosofia & Estratégia',
       description: 'Platão, Marco Aurélio, Sun Tzu e Maquiavel.',
       icon: Library,
-      path: '/category/sabedoria',
+      path: '/category/philosophy',
     },
     {
       title: 'Universal',
