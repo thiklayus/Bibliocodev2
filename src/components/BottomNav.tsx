@@ -12,7 +12,6 @@ const BottomNav = () => {
     <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-background/95 backdrop-blur">
       <div className="max-w-4xl mx-auto flex justify-around py-3">
 
-        {/* Início */}
         <button
           onClick={() => navigate('/dashboard')}
           className={`flex flex-col items-center text-xs ${
@@ -23,7 +22,6 @@ const BottomNav = () => {
           Início
         </button>
 
-        {/* Leitura */}
         <button
           onClick={() => navigate('/bible')}
           className={`flex flex-col items-center text-xs ${
@@ -34,7 +32,6 @@ const BottomNav = () => {
           Leitura
         </button>
 
-        {/* Sugerir */}
         <button
           onClick={() => navigate('/suggest')}
           className={`flex flex-col items-center text-xs ${
@@ -45,7 +42,6 @@ const BottomNav = () => {
           Sugerir
         </button>
 
-        {/* Ajustes */}
         <button
           onClick={() => navigate('/settings')}
           className={`flex flex-col items-center text-xs ${
