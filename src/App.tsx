@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-import WelcomeScreen from '@/pages/WelcomeScreen';
+import Index from '@/pages/Index';
+import Dashboard from '@/pages/Dashboard';
+import BiblePage from '@/pages/BiblePage';
 import CategoryPage from '@/pages/CategoryPage';
 import Reader from '@/pages/Reader';
 import SuggestBook from '@/pages/SuggestBook';
@@ -11,22 +13,23 @@ const App = () => {
     <BrowserRouter>
       <Routes>
 
-        {/* Página principal */}
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        {/* Entrada oficial */}
+        <Route path="/" element={<Index />} />
 
-        {/* Dashboard principal */}
-        <Route path="/dashboard" element={<WelcomeScreen />} />
+        {/* Home real */}
+        <Route path="/dashboard" element={<Dashboard />} />
+
+        {/* Bíblia isolada */}
+        <Route path="/bible" element={<BiblePage />} />
 
         {/* Categorias */}
         <Route path="/category/:categoryId" element={<CategoryPage />} />
 
-        {/* Leitura */}
+        {/* Leitura de livros (não Bíblia) */}
         <Route path="/reader/:bookId" element={<Reader />} />
 
-        {/* Sugestão */}
+        {/* Extras */}
         <Route path="/suggest" element={<SuggestBook />} />
-
-        {/* Configurações */}
         <Route path="/settings" element={<Settings />} />
 
         {/* Fallback */}
