@@ -193,3 +193,6 @@
     text-shadow: 0 0 20px hsl(var(--accent) / 0.3), 0 0 40px hsl(var(--accent) / 0.15);
   }
 }
+body {
+  background-color: red !important;
+}
