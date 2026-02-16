@@ -1,92 +1,85 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
-import BookCard from '@/components/BookCard';
-import BottomNav from '@/components/BottomNav';
+import { BookOpen, Globe, Landmark, Library } from 'lucide-react';
 
-const categoriesData: Record<string, { title: string; books: { id: string; title: string; author: string; emoji: string }[] }> = {
-  bible: {
-    title: 'Escrituras Sagradas',
-    books: [{ id: 'bible', title: 'Bíblia Sagrada ACF', author: 'Almeida Corrigida Fiel', emoji: '✝️' }],
-  },
-  classics: {
-    title: 'Literatura Brasileira',
-    books: [
-      { id: 'gutenberg-55752', title: 'Dom Casmurro', author: 'Machado de Assis', emoji: '📖' },
-      { id: 'gutenberg-54829', title: 'Memórias Póstumas de Brás Cubas', author: 'Machado de Assis', emoji: '📜' },
-    ],
-  },
-  philosophy: {
-    title: 'Filosofia & Estratégia',
-    books: [
-      { id: 'gutenberg-1497', title: 'A República', author: 'Platão', emoji: '🏛️' },
-      { id: 'local-0', title: 'Meditações', author: 'Marco Aurélio', emoji: '🧘' },
-      { id: 'local-1', title: 'A Arte da Guerra', author: 'Sun Tzu', emoji: '⚔️' },
-      { id: 'local-2', title: 'O Príncipe', author: 'Nicolau Maquiavel', emoji: '👑' },
-    ],
-  },
-  universal: {
-    title: 'Literatura Universal',
-    books: [
-      { id: 'local-3', title: 'Divina Comédia', author: 'Dante Alighieri', emoji: '🔥' },
-      { id: 'local-4', title: 'Orgulho e Preconceito', author: 'Jane Austen', emoji: '💎' },
-    ],
-  },
-};
-
-const CategoryPage = () => {
-  const { categoryId } = useParams();
+const WelcomeScreen = () => {
   const navigate = useNavigate();
-  const category = categoriesData[categoryId || ''];
 
-  if (!category) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="font-serif text-muted-foreground">Categoria não encontrada.</p>
-      </div>
-    );
-  }
+  const cards = [
+    {
+      title: 'Fé',
+      subtitle: 'Escrituras Sagradas',
+      description: 'A Bíblia Sagrada na versão Almeida Corrigida Fiel.',
+      icon: BookOpen,
+      path: '/bible',
+    },
+    {
+      title: 'Brasil',
+      subtitle: 'Literatura Brasileira',
+      description: 'Machado de Assis e as grandes obras nacionais.',
+      icon: Landmark,
+      path: '/category/classics',
+    },
+    {
+      title: 'Sabedoria',
+      subtitle: 'Filosofia & Estratégia',
+      description: 'Platão, Marco Aurélio, Sun Tzu e Maquiavel.',
+      icon: Library,
+      path: '/category/philosophy',
+    },
+    {
+      title: 'Universal',
+      subtitle: 'Clássicos Universais',
+      description: 'Dante, Jane Austen e obras fundamentais.',
+      icon: Globe,
+      path: '/category/universal',
+    },
+  ];
 
   return (
-    <div className="min-h-screen pb-20">
-      <header className="sticky top-0 z-30 glass-nav border-b border-border">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center gap-4">
-          <button onClick={() => navigate('/')} className="text-muted-foreground hover:text-foreground transition-colors">
-            <ArrowLeft className="h-5 w-5" />
-          </button>
-          <h1 className="font-display text-lg font-bold text-foreground">
-            {category.title}
-          </h1>
-        </div>
-      </header>
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12">
+      <motion.h1
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="font-display text-3xl font-bold text-center mb-8"
+      >
+        Bibliocode
+      </motion.h1>
 
-      <main className="max-w-4xl mx-auto px-4 py-8">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-6"
-        >
-          {category.books.map((book, i) => (
-            <motion.div
-              key={book.id}
-              initial={{ opacity: 0, y: 20 }}
+      <div className="grid grid-cols-1 gap-6 w-full max-w-md">
+        {cards.map((card, index) => {
+          const Icon = card.icon;
+
+          return (
+            <motion.button
+              key={card.title}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ delay: index * 0.08 }}
+              onClick={() => navigate(card.path)}
+              className="p-6 rounded-xl border border-border bg-card hover:bg-accent/10 transition-colors text-left"
             >
-              <BookCard
-                title={book.title}
-                author={book.author}
-                emoji={book.emoji}
-                onClick={() => navigate(`/reader/${book.id}`)}
-              />
-            </motion.div>
-          ))}
-        </motion.div>
-      </main>
+              <div className="flex items-center gap-4 mb-3">
+                <Icon className="h-6 w-6 text-accent" />
+                <div>
+                  <h2 className="font-display text-lg font-bold">
+                    {card.title}
+                  </h2>
+                  <p className="font-serif text-xs text-muted-foreground uppercase tracking-wide">
+                    {card.subtitle}
+                  </p>
+                </div>
+              </div>
 
-      <BottomNav />
+              <p className="font-serif text-sm text-muted-foreground">
+                {card.description}
+              </p>
+            </motion.button>
+          );
+        })}
+      </div>
     </div>
   );
 };
 
-export default CategoryPage;
+export default WelcomeScreen;
